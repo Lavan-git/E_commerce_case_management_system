@@ -7,6 +7,7 @@ from app.exceptions.case import (
     CaseNotFoundError,
     InvalidCaseStatusTransitionError,
     InvalidCaseTypeError,
+    InvalidCaseResolutionError,
 )
 from app.schemas.case import CaseCreate, CaseUpdateRequest
 from app.services.case_service import CaseService
@@ -161,3 +162,40 @@ def test_resolved_case_gets_resolved_at():
     assert result.status == "RESOLVED"
     assert result.resolution == "Refund processed."
     assert result.resolved_at is not None
+
+def test_resolving_case_requires_resolution():
+    service, _ = make_service()
+
+    case = make_case()
+
+    payload = CaseUpdateRequest(
+        status="RESOLVED",
+    )
+
+    with pytest.raises(InvalidCaseResolutionError):
+        service.update_case(
+            Mock(),
+            case,
+            payload,
+        )
+
+
+def test_terminal_case_cannot_be_reopened():
+    service, _ = make_service()
+
+    case = make_case(
+        status="CLOSED",
+    )
+
+    payload = CaseUpdateRequest(
+        status="OPEN",
+    )
+
+    with pytest.raises(
+        InvalidCaseStatusTransitionError
+    ):
+        service.update_case(
+            Mock(),
+            case,
+            payload,
+        )

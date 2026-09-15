@@ -12,8 +12,8 @@ from app.exceptions.case import (
 )
 from app.repositories.case_repository import CaseRepository
 from app.schemas.case import CaseCreate, CaseUpdateRequest
-
-
+import logging
+logger = logging.getLogger("app.case")
 class CaseService:
     SUPPORTED_CASE_TYPES = {
         "ACCOUNT",
@@ -100,6 +100,14 @@ class CaseService:
         )
 
         db.add(initial_update)
+        logger.info(
+        "case.created",
+        extra={
+            "case_id": case.case_id,
+            "case_type": case.case_type,
+            "status": case.status,
+            },
+        )
 
         return case
 
@@ -212,6 +220,14 @@ class CaseService:
             )
 
             db.add(update)
+            logger.info(
+            "case.status_changed",
+            extra={
+                "case_id": case.case_id,
+                "case_type": case.case_type,
+                "status": payload.status,
+                },
+            )
 
         self.repository.update(db, case)
 

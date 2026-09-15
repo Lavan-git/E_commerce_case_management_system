@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ecommerce_dispute_resolution
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres -d ecommerce_dispute_resolution"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Apply database schema
+        env:
+          PGPASSWORD: postgres
+        run: |
+          for file in database/schema/*.sql; do
+            psql \
+              -h localhost \
+              -p 5432 \
+              -U postgres \
+              -d ecommerce_dispute_resolution \
+              -f "$file"
+          done
+
+      - name: Load seed data
+        env:
+          PGPASSWORD: postgres
+        run: |
+          psql \
+            -h localhost \
+            -p 5432 \
+            -U postgres \
+            -d ecommerce_dispute_resolution \
+            -f database/seeds/001_demo_data.sql
+
+      - name: Run tests
+        env:
+          DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/ecommerce_dispute_resolution
+          APP_NAME: E-commerce Dispute Resolution
+          DEBUG: "false"
+        run: |
+          pytest -q
+
+      - name: Check Python compilation
+        run: |
+          python -m compileall src
