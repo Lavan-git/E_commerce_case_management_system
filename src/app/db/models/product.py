@@ -1,9 +1,14 @@
 from datetime import datetime
 
 from sqlalchemy import BigInteger, DateTime, String, Text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.db.models.vendor_product import VendorProduct
+
 
 
 class Product(Base):
@@ -41,4 +46,8 @@ class Product(Base):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
+    )
+
+    vendor_products: Mapped[list["VendorProduct"]] = relationship(
+        back_populates="product"
     )

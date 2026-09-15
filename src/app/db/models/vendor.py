@@ -1,11 +1,14 @@
 from datetime import datetime
 
 from sqlalchemy import BigInteger, DateTime, String
-from sqlalchemy.orm import Mapped, mapped_column
-
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from typing import TYPE_CHECKING
 from app.db.base import Base
 
-
+if TYPE_CHECKING:
+    from app.db.models.case import Case
+    from app.db.models.vendor_product import VendorProduct
+    from app.db.models.vendor_payout import VendorPayout
 class Vendor(Base):
     __tablename__ = "vendors"
 
@@ -64,4 +67,16 @@ class Vendor(Base):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
+    )
+
+    vendor_products: Mapped[list["VendorProduct"]] = relationship(
+        back_populates="vendor"
+    )
+
+    payouts: Mapped[list["VendorPayout"]] = relationship(
+        back_populates="vendor"
+    )
+
+    cases: Mapped[list["Case"]] = relationship(
+        back_populates="vendor"
     )

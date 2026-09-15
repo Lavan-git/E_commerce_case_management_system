@@ -2,10 +2,17 @@ from datetime import datetime
 from decimal import Decimal
 
 from sqlalchemy import BigInteger, DateTime, ForeignKey, Numeric, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from app.db.models.case import Case
+    from app.db.models.customer import Customer
+    from app.db.models.delivery import Delivery
+    from app.db.models.order_item import OrderItem
+    from app.db.models.payment import Payment
 
 class Order(Base):
     __tablename__ = "orders"
@@ -40,4 +47,24 @@ class Order(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
+    )
+
+    customer: Mapped["Customer"] = relationship(
+        back_populates="orders"
+    )
+
+    items: Mapped[list["OrderItem"]] = relationship(
+        back_populates="order"
+    )
+
+    payments: Mapped[list["Payment"]] = relationship(
+        back_populates="order"
+    )
+
+    deliveries: Mapped[list["Delivery"]] = relationship(
+        back_populates="order"
+    )
+
+    cases: Mapped[list["Case"]] = relationship(
+        back_populates="order"
     )

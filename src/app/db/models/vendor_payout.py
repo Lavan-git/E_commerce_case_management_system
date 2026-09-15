@@ -9,9 +9,14 @@ from sqlalchemy import (
     Numeric,
     String,
 )
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.db.models.case import Case
+    from app.db.models.vendor import Vendor
 
 
 class VendorPayout(Base):
@@ -54,4 +59,12 @@ class VendorPayout(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
+    )
+
+    vendor: Mapped["Vendor"] = relationship(
+        back_populates="payouts"
+    )
+
+    cases: Mapped[list["Case"]] = relationship(
+        back_populates="vendor_payout"
     )

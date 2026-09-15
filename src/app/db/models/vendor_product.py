@@ -8,10 +8,15 @@ from sqlalchemy import (
     Numeric,
     String,
 )
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from app.db.models.product import Product
+    from app.db.models.vendor import Vendor
+    from app.db.models.order_item import OrderItem
 
 class VendorProduct(Base):
     __tablename__ = "vendor_products"
@@ -56,4 +61,16 @@ class VendorProduct(Base):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
+    )
+
+    vendor: Mapped["Vendor"] = relationship(
+        back_populates="vendor_products"
+    )
+
+    product: Mapped["Product"] = relationship(
+        back_populates="vendor_products"
+    )
+
+    order_items: Mapped[list["OrderItem"]] = relationship(
+        back_populates="vendor_product"
     )

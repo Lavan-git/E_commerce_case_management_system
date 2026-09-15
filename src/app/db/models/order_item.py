@@ -8,10 +8,16 @@ from sqlalchemy import (
     Integer,
     Numeric,
 )
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from app.db.models.case import Case
+    from app.db.models.order import Order
+    from app.db.models.return_model import Return
+    from app.db.models.vendor_product import VendorProduct
 
 class OrderItem(Base):
     __tablename__ = "order_items"
@@ -46,4 +52,20 @@ class OrderItem(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
+    )
+
+    order: Mapped["Order"] = relationship(
+        back_populates="items"
+    )
+
+    vendor_product: Mapped["VendorProduct"] = relationship(
+        back_populates="order_items"
+    )
+
+    returns: Mapped[list["Return"]] = relationship(
+        back_populates="order_item"
+    )
+
+    cases: Mapped[list["Case"]] = relationship(
+        back_populates="order_item"
     )

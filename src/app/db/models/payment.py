@@ -8,9 +8,16 @@ from sqlalchemy import (
     Numeric,
     String,
 )
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.db.models.case import Case
+    from app.db.models.customer import Customer
+    from app.db.models.order import Order
+    from app.db.models.refund import Refund
 
 
 class Payment(Base):
@@ -60,4 +67,20 @@ class Payment(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
+    )
+
+    customer: Mapped["Customer"] = relationship(
+        back_populates="payments"
+    )
+
+    order: Mapped["Order | None"] = relationship(
+        back_populates="payments"
+    )
+
+    refunds: Mapped[list["Refund"]] = relationship(
+        back_populates="payment"
+    )
+
+    cases: Mapped[list["Case"]] = relationship(
+        back_populates="payment"
     )
