@@ -1,0 +1,32 @@
+[
+  {
+    "caseId": 104,
+    "customerId": 1,
+    "caseType": "payment",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "category": "PAYMENT_NOT_REFLECTED",
+    "description": "Payment deducted but order was not created.",
+    "createdAt": "2026-09-22T12:00:00"
+  },
+  {
+    "caseId": 105,
+    "customerId": 2,
+    "caseType": "delivery",
+    "priority": "medium",
+    "status": "IN_PROGRESS",
+    "category": "DELIVERY_DELAY",
+    "description": "Order has not arrived yet.",
+    "createdAt": "2026-09-22T12:30:00"
+  },
+  {
+    "caseId": 106,
+    "customerId": 3,
+    "caseType": "refund",
+    "priority": "CRITICAL",
+    "status": "OPEN",
+    "category": "REFUND_DELAY",
+    "description": "Refund has not been received.",
+    "createdAt": "2026-09-22T13:00:00"
+  }
+]

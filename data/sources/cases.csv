@@ -1,0 +1,4 @@
+case_id,customer_id,case_type,priority,status,category,description,created_at
+101,1,PAYMENT,HIGH,OPEN,PAYMENT_NOT_REFLECTED,Payment deducted but order was not created.,2026-09-22T10:30:00
+102,2,DELIVERY,MEDIUM,IN_PROGRESS,DELIVERY_DELAY,Order has not arrived yet.,2026-09-22T11:00:00
+103,3,REFUND,CRITICAL,OPEN,REFUND_DELAY,Refund has not been received.,2026-09-22T11:30:00
