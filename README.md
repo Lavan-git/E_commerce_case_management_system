@@ -1,356 +1,502 @@
 # E-commerce Dispute Resolution & Case Management System
 
-A backend case-management system for handling customer and vendor disputes arising from an e-commerce platform.
+A backend case-management system for handling customer-side and vendor-side disputes in an e-commerce environment.
 
-The system focuses on the dispute-resolution workflow rather than implementing a complete e-commerce platform. Existing e-commerce entities such as customers, vendors, orders, payments, deliveries, returns, refunds, and vendor payouts are represented only to the extent required for case management and traceability.
+The system does **not** recreate an e-commerce platform such as Amazon or Flipkart. Instead, it focuses on the data, APIs, processing pipelines, and AI capabilities required to manage disputes and resolutions on top of an existing commerce platform.
 
-## Project Objective
+## Project Goals
 
-The system provides a structured way to:
+The system is designed to support cases such as:
 
-- Create and manage customer and vendor dispute cases
-- Associate a case with relevant e-commerce records
-- Assign cases to support agents
-- Track case status and priority
-- Maintain a history of case updates
-- Support future AI-assisted case handling
-- Provide a REST API for case-management operations
-- Persist all data in PostgreSQL
+- Customer received the wrong order.
+- Order was not delivered.
+- Payment was deducted but an order was not created.
+- Refund or return was not initiated correctly.
+- Customer account/profile issues.
+- Vendor payout was delayed or incorrect.
+- Vendor dashboard or operational issues.
+
+The project is being developed as a progressive enterprise AI engineering system:
+
+```text
+Week 1  -> Case-management backend
+Week 2  -> Enterprise data pipeline + Docker
+Week 3  -> RAG
+Week 4  -> Tools, workflows, human approval, RBAC, guardrails, observability
+Week 5  -> Integration, hardening, CI/CD and final demo
+```
 
 ## Architecture
 
+At a high level, the system currently contains two major paths.
+
+### Case-management application
+
 ```text
 Client
-   |
-   v
-FastAPI API Layer
-   |
-   v
-Service Layer
-   |
-   v
-Repository Layer
-   |
-   v
-SQLAlchemy ORM
-   |
-   v
+  |
+  v
+FastAPI API
+  |
+  v
+Service layer
+  |
+  v
+Repository layer
+  |
+  v
 PostgreSQL
 ```
 
-Supporting components include:
+### Enterprise data pipeline
 
-- Request validation
-- Centralized exception handling
-- Structured JSON logging
-- Request ID middleware
-- Automated tests
-- OpenAPI documentation
+```text
+CSV / JSON / Parquet sources
+            |
+            v
+       Source adapters
+            |
+            v
+         Raw layer
+            |
+            v
+      Standardization
+            |
+            v
+     Contract validation
+            |
+            v
+       Quality checks
+        /          \
+       /            \
+      v              v
+Valid records    Rejected records
+      |              |
+      v              v
+Incremental      Quarantine
+filtering
+      |
+      v
+Curated layer
+      |
+      v
+PostgreSQL
+      |
+      v
+Pipeline audit
+```
+
+The pipeline is designed to be **incremental, idempotent, auditable, and source-agnostic**.
 
 ## Tech Stack
 
-| Component | Technology |
-|---|---|
-| Language | Python |
-| API Framework | FastAPI |
-| ORM | SQLAlchemy 2.x |
-| Database | PostgreSQL |
-| Database Driver | psycopg |
-| Validation | Pydantic |
-| Testing | pytest |
-| Coverage | coverage.py |
-| API Documentation | OpenAPI / Swagger UI |
-| Version Control | Git |
+- Python 3.12
+- FastAPI
+- Pydantic / pydantic-settings
+- SQLAlchemy
+- PostgreSQL 16
+- Psycopg
+- Pytest
+- Pandas
+- PyArrow
+- Docker
+- Docker Compose
+- Git / GitHub
 
 ## Repository Structure
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── data/
+│   ├── sources/
+│   │   ├── cases.csv
+│   │   ├── cases.json
+│   │   └── cases.parquet
+│   └── raw/
 ├── database/
 │   ├── schema/
-│   │   ├── 001_customers.sql
-│   │   ├── 002_vendors.sql
-│   │   ├── 003_products.sql
-│   │   ├── 004_vendor_products.sql
-│   │   ├── 005_orders.sql
-│   │   ├── 006_order_items.sql
-│   │   ├── 007_payments.sql
-│   │   ├── 008_vendor_payouts.sql
-│   │   ├── 009_delivery_persons.sql
-│   │   ├── 010_deliveries.sql
-│   │   ├── 011_delivery_attempts.sql
-│   │   ├── 012_returns.sql
-│   │   ├── 013_refunds.sql
-│   │   ├── 014_support_agents.sql
-│   │   ├── 015_cases.sql
-│   │   ├── 016_case_updates.sql
-│   │   └── 017_triggers.sql
-│   ├── seeds/
-│   │   └── 001_demo_data.sql
-│   └── README.md
-│
+│   └── seeds/
+├── docker/
+│   └── init-db.sh
 ├── docs/
-│   ├── architecture/
-│   │   ├── system-overview.md
-│   │   └── database-erd.md
-│   ├── api/
-│   │   └── api-design.md
-│   └── development/
-│       └── setup.md
-│
+│   └── week2-data-pipeline.md
+├── scripts/
+│   ├── generate_parquet.py
+│   └── load_curated_batch.py
 ├── src/
 │   └── app/
 │       ├── api/
 │       ├── core/
 │       ├── db/
 │       ├── exceptions/
+│       ├── pipeline/
 │       ├── repositories/
 │       ├── schemas/
 │       └── services/
-│
 ├── tests/
-│   ├── api/
-│   ├── integration/
-│   └── unit/
-│
-├── .env.example
-├── README.md
-└── ...
+├── compose.yaml
+├── Dockerfile
+├── pyproject.toml
+└── README.md
 ```
 
-## Database
+## Week 1: Case Management Backend
 
-The application uses PostgreSQL as its primary database.
+The initial backend established the core application architecture.
 
-The schema contains 16 application tables:
+### Database
 
-1. Customers
-2. Vendors
-3. Products
-4. Vendor Products
-5. Orders
-6. Order Items
-7. Payments
-8. Vendor Payouts
-9. Delivery Persons
-10. Deliveries
-11. Delivery Attempts
-12. Returns
-13. Refunds
-14. Support Agents
-15. Cases
-16. Case Updates
+The PostgreSQL schema contains the main commerce and case-management entities:
 
-The database schema is maintained using SQL migration-style files under `database/schema/`.
-
-The application does not automatically create or modify database tables through `Base.metadata.create_all()`.
-
-The SQL schema is the authoritative source for database structure.
-
-## Case Management
-
-The `cases` table is the central application entity.
-
-A case may be raised by either:
-
-- A customer
-- A vendor
-
-A case can reference related business records such as:
-
+- Customers
+- Vendors
+- Products
+- Vendor Products
 - Orders
-- Order items
+- Order Items
 - Payments
+- Vendor Payouts
+- Delivery Persons
 - Deliveries
+- Delivery Attempts
 - Returns
 - Refunds
-- Vendor payouts
+- Support Agents
+- Cases
+- Case Updates
 
-Cases support multiple statuses and priorities.
+The database is normalized to avoid unnecessary duplication. Foreign keys are used to preserve relationships between entities.
 
-### Case Statuses
+### API
 
-```text
-OPEN
-IN_PROGRESS
-WAITING_FOR_CUSTOMER
-WAITING_FOR_VENDOR
-WAITING_FOR_EXTERNAL
-RESOLVED
-CLOSED
-CANCELLED
-```
-
-### Case Priorities
+Current API endpoints include:
 
 ```text
-LOW
-MEDIUM
-HIGH
-CRITICAL
+GET    /api/v1/health
+POST   /api/v1/cases
+GET    /api/v1/cases
+GET    /api/v1/cases/{case_id}
+PATCH  /api/v1/cases/{case_id}
 ```
 
-### Case Types
+Interactive API documentation is available through FastAPI/OpenAPI at:
 
 ```text
-ACCOUNT
-ORDER
-PAYMENT
-DELIVERY
-RETURN
-REFUND
-PAYOUT
-VENDOR
-OTHER
+http://localhost:8000/docs
 ```
 
-Every case also maintains a history of updates through `case_updates`.
+## Week 2: Enterprise Data Pipeline
 
-## API
+Week 2 introduces a production-oriented data ingestion pipeline capable of processing heterogeneous source formats.
 
-The current REST API exposes case-management operations.
+### Supported source formats
 
-### Health Check
+- CSV
+- JSON
+- Parquet
 
-```http
-GET /api/v1/health
-```
+Each source can represent the same business concept using different field names and structures. Source-specific adapters read the native representation, while explicit source mappings convert records into one standardized contract.
 
-### Create Case
+### Standardized data contract
 
-```http
-POST /api/v1/cases
-```
-
-### List Cases
-
-```http
-GET /api/v1/cases
-```
-
-Supported filters include:
-
-- `status`
-- `case_type`
-- `priority`
-- `assigned_agent_id`
-
-### Get Case
-
-```http
-GET /api/v1/cases/{case_id}
-```
-
-### Update Case
-
-```http
-PATCH /api/v1/cases/{case_id}
-```
-
-Interactive API documentation is available through FastAPI's generated OpenAPI interfaces.
-
-## Error Handling
-
-The API uses a consistent error response structure.
-
-Example:
-
-```json
-{
-  "error": {
-    "code": "CASE_NOT_FOUND",
-    "message": "Case with id 999 was not found.",
-    "request_id": "8ef1b3b5-1e2c-44a9-bc2c-15a7f8d91d4a"
-  }
-}
-```
-
-Validation failures use a dedicated error code and include safe validation details.
-
-## Logging
-
-The application uses structured JSON logging.
-
-Each request receives a request ID.
-
-The request ID is:
-
-- Generated automatically when not provided
-- Accepted from an incoming `X-Request-ID` header
-- Returned in the response using the same header
-
-This allows requests to be traced across logs.
-
-Example:
-
-```json
-{
-  "timestamp": "2026-09-15T10:30:00+00:00",
-  "level": "INFO",
-  "logger": "app.http",
-  "message": "http.request",
-  "request_id": "8ef1b3b5-1e2c-44a9-bc2c-15a7f8d91d4a",
-  "status_code": 200,
-  "duration_ms": 12.41
-}
-```
-
-## Testing
-
-Tests are divided into:
+All valid case records are converted into the following conceptual structure:
 
 ```text
-tests/
-├── api/
-├── integration/
-└── unit/
+case_id
+actor_type
+actor_id
+case_type
+priority
+status
+category
+description
+created_at
 ```
 
-The test suite covers:
+The contract uses strict validation so downstream pipeline stages do not need to understand every source format.
 
-- Health endpoint
-- Case creation
-- Case retrieval
-- Case listing
-- Case filtering
-- Case updates
-- Validation failures
-- Repository operations
-- Service-layer behavior
-- Database relationships
+### Raw layer
 
-Run the test suite with:
+Original source files are preserved before transformation. Each raw batch stores metadata including:
 
-```bash
-pytest -q
+- Source name
+- Batch ID
+- Original filename
+- Stored path
+- Ingestion timestamp
+- File size
+- SHA-256 checksum
+
+This supports auditability, replay, and troubleshooting.
+
+### Quality and quarantine
+
+Schema/type correctness is handled by the standardized contract. Dataset-level quality checks handle issues such as duplicate case IDs within a batch.
+
+Rejected records are stored in `pipeline_quarantine` together with the original record and quality issues.
+
+### Curated layer
+
+Valid records are written to `curated_cases` in PostgreSQL.
+
+The table has a unique constraint on:
+
+```text
+(source_name, case_id)
 ```
 
-Run coverage with:
+This provides a database-level idempotency guardrail.
 
-```bash
-coverage run -m pytest
-coverage report
+### Incremental processing
+
+The pipeline first checks which case IDs for a source have already been curated. Existing records can therefore be skipped before attempting persistence.
+
+Incremental filtering improves efficiency.
+
+The database unique constraint provides the final correctness guarantee even if application-level filtering is bypassed or races occur.
+
+### Reconciliation
+
+Each pipeline batch verifies that all source records are accounted for:
+
+```text
+source records
+    = standardized records
+    = rejected records
+      + already-present records
+      + newly persisted records
 ```
 
-## Development Status
+A reconciliation failure causes the pipeline to fail rather than silently accepting an incomplete batch.
 
-The project currently includes:
+### Audit metadata
 
-- PostgreSQL database schema
-- Seed data
-- SQLAlchemy ORM models
-- Repository layer
-- Service layer
-- FastAPI endpoints
-- Request validation
-- Exception handling
-- Structured logging
-- Request tracing
-- Unit, integration, and API tests
-- API documentation through OpenAPI
+Every pipeline execution is recorded in `pipeline_runs` with information such as:
 
-The later training phases will extend the system toward data pipelines, RAG, tool-enabled AI workflows, human approval, authentication, observability, CI/CD, and deployment.
+- Run ID
+- Source name
+- Batch ID
+- Status
+- Start/completion timestamps
+- Source count
+- Standardized count
+- Rejected count
+- Already-present count
+- Persisted count
+- Error message when applicable
 
-## License
+## Docker Setup
 
-This project is developed as part of the KPMG Fresher AI Engineering training program.
+Docker Compose runs the environment as multiple services:
+
+```text
+postgres   -> PostgreSQL database
+app        -> FastAPI application
+ db-init   -> one-shot database initialization job
+```
+
+Inside the Compose network, the application connects to PostgreSQL using the service name `postgres` rather than `localhost`.
+
+### Prerequisites
+
+Install:
+
+- Docker Desktop
+- Docker Compose (included with current Docker Desktop installations)
+
+### Build the application image
+
+```powershell
+docker compose build
+```
+
+### Start PostgreSQL
+
+```powershell
+docker compose up -d postgres
+```
+
+### Initialize the database
+
+On a fresh database volume:
+
+```powershell
+docker compose run --rm db-init
+```
+
+The initialization job applies the SQL schema files and loads the demo seed data.
+
+### Start the API
+
+```powershell
+docker compose up -d app
+```
+
+Check service status:
+
+```powershell
+docker compose ps
+```
+
+Health endpoint:
+
+```text
+http://localhost:8000/api/v1/health
+```
+
+OpenAPI documentation:
+
+```text
+http://localhost:8000/docs
+```
+
+### Run the pipeline inside Docker
+
+```powershell
+docker compose run --rm app python scripts/load_curated_batch.py
+```
+
+## Pipeline Verification
+
+The Dockerized pipeline was executed twice using the same source batch.
+
+### First run
+
+```text
+Source records: 3
+Rejected: 0
+Already present: 0
+Newly persisted: 3
+```
+
+### Second run
+
+```text
+Source records: 3
+Rejected: 0
+Already present: 3
+Newly persisted: 0
+```
+
+The second execution did not create duplicates, demonstrating the intended incremental/idempotent behavior.
+
+The PostgreSQL `pipeline_runs` table recorded both executions with `SUCCESS` status.
+
+## Running Tests
+
+Install development dependencies:
+
+```powershell
+python -m pip install -e ".[dev]"
+```
+
+Run the complete test suite:
+
+```powershell
+pytest
+```
+
+The project includes unit, API, repository, integration, and pipeline tests.
+
+## CI
+
+GitHub Actions runs the automated test workflow with PostgreSQL available as a service dependency. The CI workflow installs the project with its development dependencies, runs the test suite, and performs a Python compilation check.
+
+## Database Operations
+
+Connect to the Docker PostgreSQL instance:
+
+```powershell
+docker compose exec postgres psql -U postgres -d ecommerce_dispute_resolution
+```
+
+Useful checks:
+
+```sql
+SELECT * FROM curated_cases ORDER BY case_id;
+
+SELECT run_id,
+       source_name,
+       status,
+       source_count,
+       standardized_count,
+       rejected_count,
+       already_present_count,
+       persisted_count
+FROM pipeline_runs
+ORDER BY started_at;
+```
+
+To completely reset the Docker database and its volume:
+
+```powershell
+docker compose down -v
+```
+
+Then recreate PostgreSQL and initialize it again.
+
+> Warning: `docker compose down -v` deletes the Docker PostgreSQL volume and therefore removes the database data stored in that volume.
+
+## Development Principles
+
+The project follows a few core engineering principles:
+
+1. Keep business responsibilities separated across API, service, repository, and pipeline layers.
+2. Validate data early so downstream components can depend on explicit contracts.
+3. Preserve source data before transformation.
+4. Prefer deterministic and explainable transformations over implicit magic.
+5. Make repeated pipeline execution safe.
+6. Record enough metadata to explain what happened during every pipeline run.
+7. Keep infrastructure reproducible through Docker.
+8. Test behavior at unit, integration, and API boundaries.
+
+## Current Status
+
+### Completed
+
+- Case-management PostgreSQL schema
+- FastAPI case-management backend
+- Layered application architecture
+- Request validation and consistent errors
+- Structured JSON logging
+- Request ID middleware
+- Automated tests
+- CI workflow
+- CSV/JSON/Parquet source adapters
+- Standardized pipeline contract
+- Raw data preservation
+- Data quality checks
+- Quarantine layer
+- Curated layer
+- Incremental processing
+- Database-backed idempotency
+- Reconciliation
+- Pipeline audit metadata
+- Docker image
+- Docker Compose environment
+- Dockerized pipeline execution
+
+### Next
+
+Week 3 introduces Retrieval-Augmented Generation (RAG):
+
+```text
+Knowledge documents
+        ↓
+Document loading
+        ↓
+Chunking
+        ↓
+Embeddings
+        ↓
+Vector storage
+        ↓
+Retrieval
+        ↓
+LLM-generated grounded response
+```
+
+The RAG layer will complement PostgreSQL rather than replace it: PostgreSQL stores transactional facts, while the knowledge base stores unstructured organizational knowledge such as policies and procedures.

@@ -1,0 +1,68 @@
+services:
+
+  postgres:
+    image: postgres:16
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ecommerce_dispute_resolution
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U postgres -d ecommerce_dispute_resolution"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  app:
+    build:
+      context: .
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/ecommerce_dispute_resolution
+      APP_NAME: E-commerce Dispute Resolution
+      DEBUG: "false"
+
+    ports:
+      - "8000:8000"
+
+
+  db-init:
+    image: postgres:16
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ecommerce_dispute_resolution
+
+    volumes:
+      - ./database/schema:/schema:ro
+      - ./database/seeds:/seeds:ro
+      - ./docker/init-db.sh:/init-db.sh:ro
+
+    entrypoint:
+      - bash
+      - /init-db.sh
+
+
+volumes:
+  postgres_data:
