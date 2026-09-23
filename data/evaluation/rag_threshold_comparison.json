@@ -1,0 +1,1645 @@
+{
+  "evaluation_file": "data\\evaluation\\rag_eval.json",
+  "vector_store": "data\\vector_store",
+  "top_k": 3,
+  "metadata_filter": true,
+  "thresholds": [
+    {
+      "top_k": 3,
+      "metadata_filter": true,
+      "min_score": 0.4,
+      "answerable_cases": 5,
+      "unsupported_cases": 1,
+      "answerable_retained": 5,
+      "answerable_retention_rate": 1.0,
+      "source_hit_rate_on_retained": 1.0,
+      "section_hit_rate_on_retained": 1.0,
+      "unsupported_rejected": 0,
+      "unsupported_rejection_rate": 0.0,
+      "cases": [
+        {
+          "id": "payment_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Payment disputes"
+          },
+          "min_score": 0.4,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "payment_policy_03_01",
+              "score": 0.7216000556945801,
+              "source": "payment_policy.md",
+              "section": "Payment deducted but order not created",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "3",
+                "section_title": "Payment deducted but order not created"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "payment_policy_02_01",
+              "score": 0.6228523850440979,
+              "source": "payment_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "payment_policy_05_01",
+              "score": 0.43324631452560425,
+              "source": "payment_policy.md",
+              "section": "Failed payments",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "5",
+                "section_title": "Failed payments"
+              }
+            }
+          ]
+        },
+        {
+          "id": "delivery_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Delivery disputes"
+          },
+          "min_score": 0.4,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "delivery_policy_03_01",
+              "score": 0.6393636465072632,
+              "source": "delivery_policy.md",
+              "section": "Order not delivered",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "3",
+                "section_title": "Order not delivered"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "delivery_policy_02_01",
+              "score": 0.6015369892120361,
+              "source": "delivery_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "delivery_policy_05_01",
+              "score": 0.5803660154342651,
+              "source": "delivery_policy.md",
+              "section": "Delivered but customer disputes receipt",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "5",
+                "section_title": "Delivered but customer disputes receipt"
+              }
+            }
+          ]
+        },
+        {
+          "id": "vendor_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Vendor payouts"
+          },
+          "min_score": 0.4,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "vendor_payout_policy_03_01",
+              "score": 0.7324312925338745,
+              "source": "vendor_payout_policy.md",
+              "section": "Payout discrepancy",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "3",
+                "section_title": "Payout discrepancy"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "vendor_payout_policy_05_01",
+              "score": 0.6290005445480347,
+              "source": "vendor_payout_policy.md",
+              "section": "Vendor dashboard issue",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "5",
+                "section_title": "Vendor dashboard issue"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "vendor_payout_policy_02_01",
+              "score": 0.572852611541748,
+              "source": "vendor_payout_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "refund_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Refunds"
+          },
+          "min_score": 0.4,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "refund_policy_03_01",
+              "score": 0.6854895353317261,
+              "source": "refund_policy.md",
+              "section": "Refund eligibility",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "3",
+                "section_title": "Refund eligibility"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "refund_policy_06_01",
+              "score": 0.6283174753189087,
+              "source": "refund_policy.md",
+              "section": "Failed refund initiation",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "6",
+                "section_title": "Failed refund initiation"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "refund_policy_05_01",
+              "score": 0.6260818243026733,
+              "source": "refund_policy.md",
+              "section": "Duplicate refund prevention",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "5",
+                "section_title": "Duplicate refund prevention"
+              }
+            }
+          ]
+        },
+        {
+          "id": "return_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Returns"
+          },
+          "min_score": 0.4,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "return_policy_04_01",
+              "score": 0.7335521578788757,
+              "source": "return_policy.md",
+              "section": "Return approval",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "4",
+                "section_title": "Return approval"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "return_policy_03_01",
+              "score": 0.7041256427764893,
+              "source": "return_policy.md",
+              "section": "Return request",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "3",
+                "section_title": "Return request"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "return_policy_02_01",
+              "score": 0.5268210172653198,
+              "source": "return_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "unsupported_001",
+          "answerable": false,
+          "metadata_filter": null,
+          "min_score": 0.4,
+          "source_hit": false,
+          "section_hit": false,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "refund_policy_02_01",
+              "score": 0.5023540258407593,
+              "source": "refund_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "refund_policy_06_01",
+              "score": 0.4869924783706665,
+              "source": "refund_policy.md",
+              "section": "Failed refund initiation",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "6",
+                "section_title": "Failed refund initiation"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "refund_policy_05_01",
+              "score": 0.46320074796676636,
+              "source": "refund_policy.md",
+              "section": "Duplicate refund prevention",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "5",
+                "section_title": "Duplicate refund prevention"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "top_k": 3,
+      "metadata_filter": true,
+      "min_score": 0.45,
+      "answerable_cases": 5,
+      "unsupported_cases": 1,
+      "answerable_retained": 5,
+      "answerable_retention_rate": 1.0,
+      "source_hit_rate_on_retained": 1.0,
+      "section_hit_rate_on_retained": 1.0,
+      "unsupported_rejected": 0,
+      "unsupported_rejection_rate": 0.0,
+      "cases": [
+        {
+          "id": "payment_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Payment disputes"
+          },
+          "min_score": 0.45,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "payment_policy_03_01",
+              "score": 0.7216000556945801,
+              "source": "payment_policy.md",
+              "section": "Payment deducted but order not created",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "3",
+                "section_title": "Payment deducted but order not created"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "payment_policy_02_01",
+              "score": 0.6228523850440979,
+              "source": "payment_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "delivery_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Delivery disputes"
+          },
+          "min_score": 0.45,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "delivery_policy_03_01",
+              "score": 0.6393636465072632,
+              "source": "delivery_policy.md",
+              "section": "Order not delivered",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "3",
+                "section_title": "Order not delivered"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "delivery_policy_02_01",
+              "score": 0.6015369892120361,
+              "source": "delivery_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "delivery_policy_05_01",
+              "score": 0.5803660154342651,
+              "source": "delivery_policy.md",
+              "section": "Delivered but customer disputes receipt",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "5",
+                "section_title": "Delivered but customer disputes receipt"
+              }
+            }
+          ]
+        },
+        {
+          "id": "vendor_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Vendor payouts"
+          },
+          "min_score": 0.45,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "vendor_payout_policy_03_01",
+              "score": 0.7324312925338745,
+              "source": "vendor_payout_policy.md",
+              "section": "Payout discrepancy",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "3",
+                "section_title": "Payout discrepancy"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "vendor_payout_policy_05_01",
+              "score": 0.6290005445480347,
+              "source": "vendor_payout_policy.md",
+              "section": "Vendor dashboard issue",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "5",
+                "section_title": "Vendor dashboard issue"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "vendor_payout_policy_02_01",
+              "score": 0.572852611541748,
+              "source": "vendor_payout_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "refund_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Refunds"
+          },
+          "min_score": 0.45,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "refund_policy_03_01",
+              "score": 0.6854895353317261,
+              "source": "refund_policy.md",
+              "section": "Refund eligibility",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "3",
+                "section_title": "Refund eligibility"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "refund_policy_06_01",
+              "score": 0.6283174753189087,
+              "source": "refund_policy.md",
+              "section": "Failed refund initiation",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "6",
+                "section_title": "Failed refund initiation"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "refund_policy_05_01",
+              "score": 0.6260818243026733,
+              "source": "refund_policy.md",
+              "section": "Duplicate refund prevention",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "5",
+                "section_title": "Duplicate refund prevention"
+              }
+            }
+          ]
+        },
+        {
+          "id": "return_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Returns"
+          },
+          "min_score": 0.45,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "return_policy_04_01",
+              "score": 0.7335521578788757,
+              "source": "return_policy.md",
+              "section": "Return approval",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "4",
+                "section_title": "Return approval"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "return_policy_03_01",
+              "score": 0.7041256427764893,
+              "source": "return_policy.md",
+              "section": "Return request",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "3",
+                "section_title": "Return request"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "return_policy_02_01",
+              "score": 0.5268210172653198,
+              "source": "return_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "unsupported_001",
+          "answerable": false,
+          "metadata_filter": null,
+          "min_score": 0.45,
+          "source_hit": false,
+          "section_hit": false,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "refund_policy_02_01",
+              "score": 0.5023540258407593,
+              "source": "refund_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "refund_policy_06_01",
+              "score": 0.4869924783706665,
+              "source": "refund_policy.md",
+              "section": "Failed refund initiation",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "6",
+                "section_title": "Failed refund initiation"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "refund_policy_05_01",
+              "score": 0.46320074796676636,
+              "source": "refund_policy.md",
+              "section": "Duplicate refund prevention",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "5",
+                "section_title": "Duplicate refund prevention"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "top_k": 3,
+      "metadata_filter": true,
+      "min_score": 0.5,
+      "answerable_cases": 5,
+      "unsupported_cases": 1,
+      "answerable_retained": 5,
+      "answerable_retention_rate": 1.0,
+      "source_hit_rate_on_retained": 1.0,
+      "section_hit_rate_on_retained": 1.0,
+      "unsupported_rejected": 0,
+      "unsupported_rejection_rate": 0.0,
+      "cases": [
+        {
+          "id": "payment_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Payment disputes"
+          },
+          "min_score": 0.5,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "payment_policy_03_01",
+              "score": 0.7216000556945801,
+              "source": "payment_policy.md",
+              "section": "Payment deducted but order not created",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "3",
+                "section_title": "Payment deducted but order not created"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "payment_policy_02_01",
+              "score": 0.6228523850440979,
+              "source": "payment_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "delivery_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Delivery disputes"
+          },
+          "min_score": 0.5,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "delivery_policy_03_01",
+              "score": 0.6393636465072632,
+              "source": "delivery_policy.md",
+              "section": "Order not delivered",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "3",
+                "section_title": "Order not delivered"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "delivery_policy_02_01",
+              "score": 0.6015369892120361,
+              "source": "delivery_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "delivery_policy_05_01",
+              "score": 0.5803660154342651,
+              "source": "delivery_policy.md",
+              "section": "Delivered but customer disputes receipt",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "5",
+                "section_title": "Delivered but customer disputes receipt"
+              }
+            }
+          ]
+        },
+        {
+          "id": "vendor_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Vendor payouts"
+          },
+          "min_score": 0.5,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "vendor_payout_policy_03_01",
+              "score": 0.7324312925338745,
+              "source": "vendor_payout_policy.md",
+              "section": "Payout discrepancy",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "3",
+                "section_title": "Payout discrepancy"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "vendor_payout_policy_05_01",
+              "score": 0.6290005445480347,
+              "source": "vendor_payout_policy.md",
+              "section": "Vendor dashboard issue",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "5",
+                "section_title": "Vendor dashboard issue"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "vendor_payout_policy_02_01",
+              "score": 0.572852611541748,
+              "source": "vendor_payout_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "refund_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Refunds"
+          },
+          "min_score": 0.5,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "refund_policy_03_01",
+              "score": 0.6854895353317261,
+              "source": "refund_policy.md",
+              "section": "Refund eligibility",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "3",
+                "section_title": "Refund eligibility"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "refund_policy_06_01",
+              "score": 0.6283174753189087,
+              "source": "refund_policy.md",
+              "section": "Failed refund initiation",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "6",
+                "section_title": "Failed refund initiation"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "refund_policy_05_01",
+              "score": 0.6260818243026733,
+              "source": "refund_policy.md",
+              "section": "Duplicate refund prevention",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "5",
+                "section_title": "Duplicate refund prevention"
+              }
+            }
+          ]
+        },
+        {
+          "id": "return_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Returns"
+          },
+          "min_score": 0.5,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "return_policy_04_01",
+              "score": 0.7335521578788757,
+              "source": "return_policy.md",
+              "section": "Return approval",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "4",
+                "section_title": "Return approval"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "return_policy_03_01",
+              "score": 0.7041256427764893,
+              "source": "return_policy.md",
+              "section": "Return request",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "3",
+                "section_title": "Return request"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "return_policy_02_01",
+              "score": 0.5268210172653198,
+              "source": "return_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "unsupported_001",
+          "answerable": false,
+          "metadata_filter": null,
+          "min_score": 0.5,
+          "source_hit": false,
+          "section_hit": false,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "refund_policy_02_01",
+              "score": 0.5023540258407593,
+              "source": "refund_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "top_k": 3,
+      "metadata_filter": true,
+      "min_score": 0.55,
+      "answerable_cases": 5,
+      "unsupported_cases": 1,
+      "answerable_retained": 5,
+      "answerable_retention_rate": 1.0,
+      "source_hit_rate_on_retained": 1.0,
+      "section_hit_rate_on_retained": 1.0,
+      "unsupported_rejected": 1,
+      "unsupported_rejection_rate": 1.0,
+      "cases": [
+        {
+          "id": "payment_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Payment disputes"
+          },
+          "min_score": 0.55,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "payment_policy_03_01",
+              "score": 0.7216000556945801,
+              "source": "payment_policy.md",
+              "section": "Payment deducted but order not created",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "3",
+                "section_title": "Payment deducted but order not created"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "payment_policy_02_01",
+              "score": 0.6228523850440979,
+              "source": "payment_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "delivery_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Delivery disputes"
+          },
+          "min_score": 0.55,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "delivery_policy_03_01",
+              "score": 0.6393636465072632,
+              "source": "delivery_policy.md",
+              "section": "Order not delivered",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "3",
+                "section_title": "Order not delivered"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "delivery_policy_02_01",
+              "score": 0.6015369892120361,
+              "source": "delivery_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "delivery_policy_05_01",
+              "score": 0.5803660154342651,
+              "source": "delivery_policy.md",
+              "section": "Delivered but customer disputes receipt",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "5",
+                "section_title": "Delivered but customer disputes receipt"
+              }
+            }
+          ]
+        },
+        {
+          "id": "vendor_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Vendor payouts"
+          },
+          "min_score": 0.55,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "vendor_payout_policy_03_01",
+              "score": 0.7324312925338745,
+              "source": "vendor_payout_policy.md",
+              "section": "Payout discrepancy",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "3",
+                "section_title": "Payout discrepancy"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "vendor_payout_policy_05_01",
+              "score": 0.6290005445480347,
+              "source": "vendor_payout_policy.md",
+              "section": "Vendor dashboard issue",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "5",
+                "section_title": "Vendor dashboard issue"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "vendor_payout_policy_02_01",
+              "score": 0.572852611541748,
+              "source": "vendor_payout_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "refund_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Refunds"
+          },
+          "min_score": 0.55,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "refund_policy_03_01",
+              "score": 0.6854895353317261,
+              "source": "refund_policy.md",
+              "section": "Refund eligibility",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "3",
+                "section_title": "Refund eligibility"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "refund_policy_06_01",
+              "score": 0.6283174753189087,
+              "source": "refund_policy.md",
+              "section": "Failed refund initiation",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "6",
+                "section_title": "Failed refund initiation"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "refund_policy_05_01",
+              "score": 0.6260818243026733,
+              "source": "refund_policy.md",
+              "section": "Duplicate refund prevention",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "5",
+                "section_title": "Duplicate refund prevention"
+              }
+            }
+          ]
+        },
+        {
+          "id": "return_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Returns"
+          },
+          "min_score": 0.55,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "return_policy_04_01",
+              "score": 0.7335521578788757,
+              "source": "return_policy.md",
+              "section": "Return approval",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "4",
+                "section_title": "Return approval"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "return_policy_03_01",
+              "score": 0.7041256427764893,
+              "source": "return_policy.md",
+              "section": "Return request",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "3",
+                "section_title": "Return request"
+              }
+            }
+          ]
+        },
+        {
+          "id": "unsupported_001",
+          "answerable": false,
+          "metadata_filter": null,
+          "min_score": 0.55,
+          "source_hit": false,
+          "section_hit": false,
+          "retrieved": false,
+          "results": []
+        }
+      ]
+    },
+    {
+      "top_k": 3,
+      "metadata_filter": true,
+      "min_score": 0.6,
+      "answerable_cases": 5,
+      "unsupported_cases": 1,
+      "answerable_retained": 5,
+      "answerable_retention_rate": 1.0,
+      "source_hit_rate_on_retained": 1.0,
+      "section_hit_rate_on_retained": 1.0,
+      "unsupported_rejected": 1,
+      "unsupported_rejection_rate": 1.0,
+      "cases": [
+        {
+          "id": "payment_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Payment disputes"
+          },
+          "min_score": 0.6,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "payment_policy_03_01",
+              "score": 0.7216000556945801,
+              "source": "payment_policy.md",
+              "section": "Payment deducted but order not created",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "3",
+                "section_title": "Payment deducted but order not created"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "payment_policy_02_01",
+              "score": 0.6228523850440979,
+              "source": "payment_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Payment disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Payment Dispute Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "delivery_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Delivery disputes"
+          },
+          "min_score": 0.6,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "delivery_policy_03_01",
+              "score": 0.6393636465072632,
+              "source": "delivery_policy.md",
+              "section": "Order not delivered",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "3",
+                "section_title": "Order not delivered"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "delivery_policy_02_01",
+              "score": 0.6015369892120361,
+              "source": "delivery_policy.md",
+              "section": "Purpose",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Delivery disputes",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Delivery Policy",
+                "section_index": "2",
+                "section_title": "Purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "vendor_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Vendor payouts"
+          },
+          "min_score": 0.6,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "vendor_payout_policy_03_01",
+              "score": 0.7324312925338745,
+              "source": "vendor_payout_policy.md",
+              "section": "Payout discrepancy",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "3",
+                "section_title": "Payout discrepancy"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "vendor_payout_policy_05_01",
+              "score": 0.6290005445480347,
+              "source": "vendor_payout_policy.md",
+              "section": "Vendor dashboard issue",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Vendor payouts",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Vendor Payout Policy",
+                "section_index": "5",
+                "section_title": "Vendor dashboard issue"
+              }
+            }
+          ]
+        },
+        {
+          "id": "refund_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Refunds"
+          },
+          "min_score": 0.6,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "refund_policy_03_01",
+              "score": 0.6854895353317261,
+              "source": "refund_policy.md",
+              "section": "Refund eligibility",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "3",
+                "section_title": "Refund eligibility"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "refund_policy_06_01",
+              "score": 0.6283174753189087,
+              "source": "refund_policy.md",
+              "section": "Failed refund initiation",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "6",
+                "section_title": "Failed refund initiation"
+              }
+            },
+            {
+              "rank": 3,
+              "chunk_id": "refund_policy_05_01",
+              "score": 0.6260818243026733,
+              "source": "refund_policy.md",
+              "section": "Duplicate refund prevention",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Refunds",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Refund Policy",
+                "section_index": "5",
+                "section_title": "Duplicate refund prevention"
+              }
+            }
+          ]
+        },
+        {
+          "id": "return_001",
+          "answerable": true,
+          "metadata_filter": {
+            "domain": "Returns"
+          },
+          "min_score": 0.6,
+          "source_hit": true,
+          "section_hit": true,
+          "retrieved": true,
+          "results": [
+            {
+              "rank": 1,
+              "chunk_id": "return_policy_04_01",
+              "score": 0.7335521578788757,
+              "source": "return_policy.md",
+              "section": "Return approval",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "4",
+                "section_title": "Return approval"
+              }
+            },
+            {
+              "rank": 2,
+              "chunk_id": "return_policy_03_01",
+              "score": 0.7041256427764893,
+              "source": "return_policy.md",
+              "section": "Return request",
+              "metadata": {
+                "document_type": "Policy",
+                "domain": "Returns",
+                "version": "1.0",
+                "status": "Active",
+                "title": "Return Policy",
+                "section_index": "3",
+                "section_title": "Return request"
+              }
+            }
+          ]
+        },
+        {
+          "id": "unsupported_001",
+          "answerable": false,
+          "metadata_filter": null,
+          "min_score": 0.6,
+          "source_hit": false,
+          "section_hit": false,
+          "retrieved": false,
+          "results": []
+        }
+      ]
+    }
+  ]
+}

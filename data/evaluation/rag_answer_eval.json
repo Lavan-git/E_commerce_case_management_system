@@ -1,0 +1,75 @@
+[
+  {
+    "id": "payment_answer_001",
+    "question": "A customer says money was deducted but no order was created. What should the support agent do?",
+    "answerable": true,
+    "metadata_filter": {
+      "domain": "Payment disputes"
+    },
+    "expected_sources": [
+      "payment_policy.md"
+    ],
+    "required_claims": [
+      "verify the payment transaction",
+      "check whether an order exists",
+      "create or maintain a payment reconciliation case",
+      "do not ask the customer to pay again",
+      "keep the case open"
+    ],
+    "acceptable_abstentions": [],
+    "forbidden_claims": [
+      "refund deadline",
+      "guaranteed refund",
+      "payment will be refunded immediately",
+      "follow the applicable refund procedure"
+    ]
+  },
+  {
+    "id": "delivery_answer_001",
+    "question": "A customer says their order was not delivered. What should the support agent investigate?",
+    "answerable": true,
+    "metadata_filter": {
+      "domain": "Delivery disputes"
+    },
+    "expected_sources": [
+      "delivery_policy.md"
+    ],
+    "required_claims": [
+      "verify the relevant order",
+      "check the delivery record",
+      "inspect delivery attempts"
+    ],
+    "acceptable_abstentions": [],
+    "forbidden_claims": [
+      "guaranteed compensation",
+      "automatic refund",
+      "verified payment state"
+    ]
+  },
+  {
+    "id": "unsupported_answer_001",
+    "question": "What is the maximum number of days allowed for requesting a refund?",
+    "answerable": false,
+    "metadata_filter": {
+      "domain": "Refunds"
+    },
+    "expected_sources": [
+      "refund_policy.md"
+    ],
+    "required_claims": [],
+    "acceptable_abstentions": [
+      "insufficient policy evidence",
+      "does not provide enough information",
+      "not enough information",
+      "cannot answer this question",
+      "does not specify"
+    ],
+    "forbidden_claims": [
+      "7 days",
+      "14 days",
+      "30 days",
+      "refund deadline",
+      "maximum number of days"
+    ]
+  }
+]

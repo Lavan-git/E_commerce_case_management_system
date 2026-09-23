@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
-from app.api.v1 import cases, health
+from app.api.v1 import cases, health,rag
+
 
 
 router = APIRouter(
@@ -13,4 +14,8 @@ router.include_router(
 
 router.include_router(
     cases.router,
+)
+
+router.include_router(
+    rag.router,
 )

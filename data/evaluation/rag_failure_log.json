@@ -1,0 +1,35 @@
+[
+  {
+    "id": "failure_001",
+    "type": "generation_grounding",
+    "question": "A customer says their payment was deducted, but the order was never created. What should the support agent do?",
+    "observed_issue": "The generated answer included a refund-related recommendation that was not present in the retrieved context.",
+    "retrieved_sources": [
+      "payment_policy.md — Resolution principle",
+      "payment_policy.md — Payment deducted but order not created",
+      "payment_policy.md — Purpose"
+    ],
+    "root_cause": "The generator introduced information from outside the retrieved evidence.",
+    "severity": "medium",
+    "fix": "Strengthen grounding instructions and evaluate unsupported claims explicitly.",
+    "status": "identified"
+  },
+  {
+    "failure_id": "GEN-001",
+    "case_id": "payment_answer_001",
+    "type": "unsupported_claim",
+    "query": "A customer says their payment was deducted but the order was never created.",
+    "observed_claim": "If reconciliation confirms that the payment cannot be associated with a valid order, follow the applicable refund procedure.",
+    "supporting_source": "payment_policy.md",
+    "supporting_section": "Payment deducted but order not created",
+    "supported": false,
+    "retrieval_status": "PASS",
+    "generation_status": "UNSUPPORTED_CLAIM",
+    "evaluation_guard_status": "BLOCKED",
+    "public_api_status": "NOT_BLOCKED",
+    "root_cause": "The generator introduced a policy step that was not present in the retrieved payment-policy evidence.",
+    "resolution": "The evaluation GroundingGuard detects the known forbidden claim and converts the answer to a safe refusal.",
+    "remaining_limitation": "The current public API does not supply case-specific forbidden claims, so the deterministic evaluation guard cannot detect arbitrary unsupported claims.",
+    "status": "IDENTIFIED_AND_DOCUMENTED"
+  }
+]

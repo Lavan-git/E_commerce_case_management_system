@@ -1,0 +1,59 @@
+[
+  {
+    "id": "payment_001",
+    "question": "A customer says money was deducted but no order was created. What policy applies?",
+    "answerable": true,
+    "expected_sources": ["payment_policy.md"],
+    "expected_sections": ["Payment deducted but order not created"],
+    "metadata_filter": {
+      "domain": "Payment disputes"
+    }
+  },
+  {
+    "id": "delivery_001",
+    "question": "A customer says their order was never delivered. What should the support agent investigate?",
+    "answerable": true,
+    "expected_sources": ["delivery_policy.md"],
+    "expected_sections": ["Order not delivered"],
+    "metadata_filter": {
+      "domain": "Delivery disputes"
+    }
+  },
+  {
+    "id": "vendor_001",
+    "question": "A vendor says their payout amount is lower than expected. What should be checked?",
+    "answerable": true,
+    "expected_sources": ["vendor_payout_policy.md"],
+    "expected_sections": ["Payout discrepancy"],
+    "metadata_filter": {
+      "domain": "Vendor payouts"
+    }
+  },
+  {
+    "id": "refund_001",
+    "question": "When may a refund be initiated?",
+    "answerable": true,
+    "expected_sources": ["refund_policy.md"],
+    "expected_sections": ["Refund eligibility"],
+    "metadata_filter": {
+      "domain": "Refunds"
+    }
+  },
+  {
+    "id": "return_001",
+    "question": "What should be verified before approving a customer return?",
+    "answerable": true,
+    "expected_sources": ["return_policy.md"],
+    "expected_sections": ["Return request", "Return approval"],
+    "metadata_filter": {
+      "domain": "Returns"
+    }
+  },
+  {
+    "id": "unsupported_001",
+    "question": "What is the maximum number of days allowed for requesting a refund?",
+    "answerable": false,
+    "expected_sources": [],
+    "expected_sections": []
+  }
+]

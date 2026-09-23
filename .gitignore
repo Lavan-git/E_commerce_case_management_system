@@ -33,3 +33,4 @@ dist/
 *.log
 
 data/raw/
+data/vector_store/
